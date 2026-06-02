@@ -158,10 +158,10 @@ ttkv/
 If you use TTKV in your research:
 
 ```bibtex
-@software{ttkv2024,
+@software{ttkv2026,
   title={TTKV: Salience-Aware Tiered KV Cache Compression},
   author={Pérez Muñiz, Zabdiel},
-  year={2024},
+  year={2026},
   url={https://github.com/zabwie/ttkv}
 }
 ```
@@ -178,4 +178,4 @@ MIT License - see [LICENSE](LICENSE) file.
 ## Contact
 
 - GitHub Issues: [github.com/zabwie/ttkv/issues](https://github.com/zabwie/ttkv/issues)
-- Email: your.email@example.com
+- Email: zabdielperez00@gmail.com
