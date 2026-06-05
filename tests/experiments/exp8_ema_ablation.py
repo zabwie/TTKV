@@ -4,9 +4,6 @@ Experiment #8: EMA Ablation During Generation
 Tests whether applying EMA updates during generation steps provides benefit.
 """
 
-import sys
-sys.path.insert(0, '../src')
-
 import torch
 import torch.nn.functional as F
 import numpy as np

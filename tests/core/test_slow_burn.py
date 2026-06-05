@@ -6,16 +6,13 @@ and is needed MUCH LATER. This breaks binary eviction methods (H2O, ScissorHands
 but tiered compression survives via structural floor.
 """
 
-import sys
-sys.path.insert(0, '../src')
-
 import torch
 import torch.nn.functional as F
 import numpy as np
 
 from ttkv import CacheConfig, TieredKVCache
 from ttkv import compute_type_prior_retention
-from baselines import H2OCache, ScissorHandsCache
+from tests.core.baselines import H2OCache, ScissorHandsCache
 
 
 def create_slow_burn_context(seq_len, needle_idx=0):
@@ -51,7 +48,7 @@ def create_slow_burn_context(seq_len, needle_idx=0):
     return k, v, positions, token_ids, retention, needle_idx
 
 
-def test_retrieval(k_cache, v_cache, positions_cache, needle_idx, query_pos):
+def check_retrieval(k_cache, v_cache, positions_cache, needle_idx, query_pos):
     """
     Test if we can retrieve the needle at query position.
     Returns probability of attending to needle.
@@ -77,7 +74,7 @@ def test_retrieval(k_cache, v_cache, positions_cache, needle_idx, query_pos):
     return needle_prob
 
 
-def test_slow_burn_tiered(seq_len, needle_idx=0, tau=0.9):
+def run_slow_burn_tiered(seq_len, needle_idx=0, tau=0.9):
     """Test tiered compression on slow burn scenario."""
     k, v, positions, token_ids, retention, needle = create_slow_burn_context(seq_len, needle_idx)
     
@@ -89,7 +86,7 @@ def test_slow_burn_tiered(seq_len, needle_idx=0, tau=0.9):
     stats = cache.get_stats()
     
     # Test retrieval
-    needle_prob = test_retrieval(k_comp, v_comp, pos_comp, needle, seq_len)
+    needle_prob = check_retrieval(k_comp, v_comp, pos_comp, needle, seq_len)
     preserved = needle_prob > 0.01
     
     return {
@@ -103,7 +100,7 @@ def test_slow_burn_tiered(seq_len, needle_idx=0, tau=0.9):
     }
 
 
-def test_slow_burn_h2o(seq_len, needle_idx=0, max_cache_size=2048):
+def run_slow_burn_h2o(seq_len, needle_idx=0, max_cache_size=2048):
     k, v, positions, token_ids, retention, needle = create_slow_burn_context(seq_len, needle_idx)
     
     config = CacheConfig()
@@ -120,7 +117,7 @@ def test_slow_burn_h2o(seq_len, needle_idx=0, max_cache_size=2048):
     k_comp, v_comp, pos_comp = cache.get_compressed_cache()
     stats = cache.get_stats()
     
-    needle_prob = test_retrieval(k_comp, v_comp, pos_comp, needle, seq_len)
+    needle_prob = check_retrieval(k_comp, v_comp, pos_comp, needle, seq_len)
     preserved = needle_prob > 0.01
     
     return {
@@ -134,7 +131,7 @@ def test_slow_burn_h2o(seq_len, needle_idx=0, max_cache_size=2048):
     }
 
 
-def test_slow_burn_scissorhands(seq_len, needle_idx=0, max_cache_size=2048):
+def run_slow_burn_scissorhands(seq_len, needle_idx=0, max_cache_size=2048):
     k, v, positions, token_ids, retention, needle = create_slow_burn_context(seq_len, needle_idx)
     
     # ScissorHands uses recent attention window (256 tokens). Needle at pos 0 never receives
@@ -146,7 +143,7 @@ def test_slow_burn_scissorhands(seq_len, needle_idx=0, max_cache_size=2048):
     k_comp, v_comp, pos_comp = cache.get_compressed_cache()
     stats = cache.get_stats()
     
-    needle_prob = test_retrieval(k_comp, v_comp, pos_comp, needle, seq_len)
+    needle_prob = check_retrieval(k_comp, v_comp, pos_comp, needle, seq_len)
     preserved = needle_prob > 0.01
     
     return {
@@ -178,13 +175,13 @@ def run_comparison(seq_len=15000, needle_idx=0):
     results = []
     
     print("Testing H2O...")
-    results.append(test_slow_burn_h2o(seq_len, needle_idx))
+    results.append(run_slow_burn_h2o(seq_len, needle_idx))
     
     print("Testing ScissorHands...")
-    results.append(test_slow_burn_scissorhands(seq_len, needle_idx))
+    results.append(run_slow_burn_scissorhands(seq_len, needle_idx))
     
     print("Testing Tiered (Ours)...")
-    results.append(test_slow_burn_tiered(seq_len, needle_idx))
+    results.append(run_slow_burn_tiered(seq_len, needle_idx))
     
     # Print results table
     print("\n" + "=" * 80)

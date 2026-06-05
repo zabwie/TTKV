@@ -3,7 +3,7 @@ include LICENSE
 include pyproject.toml
 
 # Include type hints
-include src/3tkv/py.typed
+include src/ttkv/py.typed
 
 # Exclude development files
 exclude .gitignore

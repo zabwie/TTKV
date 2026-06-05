@@ -6,6 +6,8 @@ import numpy as np
 from typing import Dict, List, Optional, Tuple
 from collections import defaultdict
 
+from .core import CacheConfig, TieredKVCache
+
 
 class AttentionGuidedScorer:
 
@@ -94,8 +96,6 @@ class AttentionGuidedScorer:
 class AttentionBasedKVCache:
 
     def __init__(self, config, tokenizer=None):
-        from .core import CacheConfig, TieredKVCache
-
         self.config = config
         self.tokenizer = tokenizer
         self.scorer = AttentionGuidedScorer(
@@ -119,7 +119,6 @@ class AttentionBasedKVCache:
         salience = self.scorer.get_salience_scores(seq_len, structural_scores)
         salience = salience.unsqueeze(0).repeat(batch_size, 1)
 
-        from salience_cache import TieredKVCache
         cache = TieredKVCache(self.config)
         cache.add(k, v, salience, positions)
 
@@ -162,20 +161,32 @@ class AttentionGuidedWrapper:
 
         generated = input_ids
         all_stats = []
+        compressed_past = None
 
         for step in range(max_new_tokens):
             with torch.no_grad():
-                outputs = self.model(
-                    generated,
-                    use_cache=True,
-                    output_attentions=True
-                )
+                if compressed_past is not None:
+                    # NOTE: Shape mismatches between compressed cache and model
+                    # expectations (e.g. with rotary embeddings or GQA) may require
+                    # model-specific patching for full integration.
+                    outputs = self.model(
+                        generated[:, -1:],
+                        past_key_values=compressed_past,
+                        use_cache=False,
+                        output_attentions=True
+                    )
+                else:
+                    outputs = self.model(
+                        generated,
+                        use_cache=True,
+                        output_attentions=True
+                    )
 
             attn_weights = extract_attention_weights(outputs)
-            past_kv = outputs.past_key_values
+            past_kv = compressed_past if compressed_past is not None else outputs.past_key_values
 
-            if attn_weights is not None and step > 0:
-                compressed_past = []
+            if attn_weights is not None and past_kv is not None:
+                compressed_past_list = []
                 for layer_idx, layer_cache in enumerate(past_kv):
                     k = layer_cache[0]
                     v = layer_cache[1]
@@ -188,10 +199,12 @@ class AttentionGuidedWrapper:
                         k, v, attn_weights, token_ids, positions
                     )
 
-                    compressed_past.append((k_comp, v_comp))
+                    compressed_past_list.append((k_comp, v_comp))
 
                     if layer_idx == 0:
                         all_stats.append(stats)
+
+                compressed_past = tuple(compressed_past_list)
 
             logits = outputs.logits
             next_token_logits = logits[:, -1, :] / temperature

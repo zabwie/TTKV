@@ -5,9 +5,6 @@ Shows the flat region where tiered compression gives high compression
 with minimal quality loss, before the cliff where quality degrades.
 """
 
-import sys
-sys.path.insert(0, '../src')
-
 import torch
 import torch.nn.functional as F
 import numpy as np

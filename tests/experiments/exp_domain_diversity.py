@@ -14,9 +14,6 @@ This test evaluates the structural survival floor across:
 Validates that the floor generalizes across domain-specific token importance patterns.
 """
 
-import sys
-sys.path.insert(0, '../src')
-
 import torch
 import torch.nn.functional as F
 import numpy as np

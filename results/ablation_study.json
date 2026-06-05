@@ -1,0 +1,746 @@
+{
+  "study": "ttkv_ablation",
+  "description": "Component ablation measuring slow-burn retrieval performance",
+  "model": "Qwen2.5-0.5B-Instruct (dimensions only)",
+  "context_length": 3600,
+  "num_heads": 2,
+  "head_dim": 64,
+  "hidden_dim": 896,
+  "num_needles": 6,
+  "num_configurations": 5,
+  "summary": {
+    "full_ttkv": {
+      "recall_rate": 1.0,
+      "successes": 6,
+      "total": 6,
+      "avg_retrieval_prob": 0.10486404908200105,
+      "avg_compression_ratio": 5.365938711890003
+    },
+    "no_retention_floor": {
+      "recall_rate": 0.0,
+      "successes": 0,
+      "total": 6,
+      "avg_retrieval_prob": 0.005281103522672008,
+      "avg_compression_ratio": 5.853658536585365
+    },
+    "uniform_pooling": {
+      "recall_rate": 0.0,
+      "successes": 0,
+      "total": 6,
+      "avg_retrieval_prob": 0.005281748599372804,
+      "avg_compression_ratio": 5.853658536585365
+    },
+    "no_position_sort": {
+      "recall_rate": 1.0,
+      "successes": 6,
+      "total": 6,
+      "avg_retrieval_prob": 0.027762932237237692,
+      "avg_compression_ratio": 5.365938711890003
+    },
+    "binary_equivalent": {
+      "recall_rate": 0.0,
+      "successes": 0,
+      "total": 6,
+      "avg_retrieval_prob": 0.0,
+      "avg_compression_ratio": 5.365938711890003
+    }
+  },
+  "needles": [
+    {
+      "name": "password_early",
+      "description": "Passkey at very early position",
+      "position": 20,
+      "needle_range": [
+        18,
+        25
+      ]
+    },
+    {
+      "name": "code_var_mid",
+      "description": "Code variable at mid position",
+      "position": 600,
+      "needle_range": [
+        596,
+        606
+      ]
+    },
+    {
+      "name": "number_mid",
+      "description": "Numeric value at position 1200",
+      "position": 1200,
+      "needle_range": [
+        1195,
+        1208
+      ]
+    },
+    {
+      "name": "name_early",
+      "description": "Named entity at early position",
+      "position": 100,
+      "needle_range": [
+        96,
+        108
+      ]
+    },
+    {
+      "name": "fact_late",
+      "description": "Factual statement at position 1800",
+      "position": 1800,
+      "needle_range": [
+        1794,
+        1810
+      ]
+    },
+    {
+      "name": "mixed_late",
+      "description": "Mixed content at position 2500",
+      "position": 2500,
+      "needle_range": [
+        2493,
+        2512
+      ]
+    }
+  ],
+  "configurations": [
+    {
+      "name": "full_ttkv",
+      "description": "auto_config + build_retention_mask, tau=0.9, retention floor + position sort"
+    },
+    {
+      "name": "no_retention_floor",
+      "description": "uniform retention=0.3, no needle protection \u2014 tests if floor matters"
+    },
+    {
+      "name": "uniform_pooling",
+      "description": "uniform retention=0.5, no weighted pooling \u2014 tests if protection of specific tokens matters"
+    },
+    {
+      "name": "no_position_sort",
+      "description": "tiers concatenated by priority, not position \u2014 original buggy version"
+    },
+    {
+      "name": "binary_equivalent",
+      "description": "H2O-style binary eviction at same budget as TTKV compressed count"
+    }
+  ],
+  "per_needle_results": [
+    {
+      "configuration": "full_ttkv",
+      "description": "auto_config + build_retention_mask, tau=0.9, position-sorted",
+      "needle_survived": true,
+      "needle_pos_present": true,
+      "retrieval_prob": 0.03251739218831062,
+      "compression_ratio": 5.47945205479452,
+      "total_tokens": 3600,
+      "compressed_tokens": 657,
+      "num_needle_tokens": 7,
+      "tau": 0.9,
+      "tier0_size": 32,
+      "tier1_size": 2048,
+      "needle_name": "password_early",
+      "needle_description": "Passkey at very early position",
+      "needle_position": 20,
+      "needle_range": [
+        18,
+        25
+      ]
+    },
+    {
+      "configuration": "no_retention_floor",
+      "description": "uniform retention=0.3, no needle protection",
+      "needle_survived": false,
+      "needle_pos_present": true,
+      "retrieval_prob": 0.0018981491448357701,
+      "compression_ratio": 5.853658536585366,
+      "total_tokens": 3600,
+      "compressed_tokens": 615,
+      "num_needle_tokens": 1,
+      "tau": 0.9,
+      "tier0_size": 8,
+      "tier1_size": 2048,
+      "needle_name": "password_early",
+      "needle_description": "Passkey at very early position",
+      "needle_position": 20,
+      "needle_range": [
+        18,
+        25
+      ]
+    },
+    {
+      "configuration": "uniform_pooling",
+      "description": "uniform retention=0.5, no weighted pooling",
+      "needle_survived": false,
+      "needle_pos_present": true,
+      "retrieval_prob": 0.002658102661371231,
+      "compression_ratio": 5.853658536585366,
+      "total_tokens": 3600,
+      "compressed_tokens": 615,
+      "num_needle_tokens": 1,
+      "tau": 0.9,
+      "tier0_size": 8,
+      "tier1_size": 2048,
+      "needle_name": "password_early",
+      "needle_description": "Passkey at very early position",
+      "needle_position": 20,
+      "needle_range": [
+        18,
+        25
+      ]
+    },
+    {
+      "configuration": "no_position_sort",
+      "description": "tiers concatenated by priority, not position \u2014 original buggy version",
+      "needle_survived": true,
+      "needle_pos_present": true,
+      "retrieval_prob": 0.012850160710513592,
+      "compression_ratio": 5.47945205479452,
+      "total_tokens": 3600,
+      "compressed_tokens": 657,
+      "num_needle_tokens": 7,
+      "tau": 0.9,
+      "tier0_size": 32,
+      "tier1_size": 2048,
+      "needle_name": "password_early",
+      "needle_description": "Passkey at very early position",
+      "needle_position": 20,
+      "needle_range": [
+        18,
+        25
+      ]
+    },
+    {
+      "configuration": "binary_equivalent",
+      "description": "H2O-style selection, budget=657 (matched to TTKV compressed count)",
+      "needle_survived": false,
+      "needle_pos_present": false,
+      "retrieval_prob": 0.0,
+      "compression_ratio": 5.47945205479452,
+      "total_tokens": 3600,
+      "compressed_tokens": 657,
+      "num_needle_tokens": 0,
+      "budget": 657,
+      "needle_name": "password_early",
+      "needle_description": "Passkey at very early position",
+      "needle_position": 20,
+      "needle_range": [
+        18,
+        25
+      ]
+    },
+    {
+      "configuration": "full_ttkv",
+      "description": "auto_config + build_retention_mask, tau=0.9, position-sorted",
+      "needle_survived": true,
+      "needle_pos_present": true,
+      "retrieval_prob": 0.08397041261196136,
+      "compression_ratio": 5.397301349325337,
+      "total_tokens": 3600,
+      "compressed_tokens": 667,
+      "num_needle_tokens": 11,
+      "tau": 0.9,
+      "tier0_size": 35,
+      "tier1_size": 2048,
+      "needle_name": "code_var_mid",
+      "needle_description": "Code variable at mid position",
+      "needle_position": 600,
+      "needle_range": [
+        596,
+        606
+      ]
+    },
+    {
+      "configuration": "no_retention_floor",
+      "description": "uniform retention=0.3, no needle protection",
+      "needle_survived": false,
+      "needle_pos_present": true,
+      "retrieval_prob": 0.005373165477067232,
+      "compression_ratio": 5.853658536585366,
+      "total_tokens": 3600,
+      "compressed_tokens": 615,
+      "num_needle_tokens": 3,
+      "tau": 0.9,
+      "tier0_size": 8,
+      "tier1_size": 2048,
+      "needle_name": "code_var_mid",
+      "needle_description": "Code variable at mid position",
+      "needle_position": 600,
+      "needle_range": [
+        596,
+        606
+      ]
+    },
+    {
+      "configuration": "uniform_pooling",
+      "description": "uniform retention=0.5, no weighted pooling",
+      "needle_survived": false,
+      "needle_pos_present": true,
+      "retrieval_prob": 0.004360525403171778,
+      "compression_ratio": 5.853658536585366,
+      "total_tokens": 3600,
+      "compressed_tokens": 615,
+      "num_needle_tokens": 3,
+      "tau": 0.9,
+      "tier0_size": 8,
+      "tier1_size": 2048,
+      "needle_name": "code_var_mid",
+      "needle_description": "Code variable at mid position",
+      "needle_position": 600,
+      "needle_range": [
+        596,
+        606
+      ]
+    },
+    {
+      "configuration": "no_position_sort",
+      "description": "tiers concatenated by priority, not position \u2014 original buggy version",
+      "needle_survived": true,
+      "needle_pos_present": true,
+      "retrieval_prob": 0.021549643948674202,
+      "compression_ratio": 5.397301349325337,
+      "total_tokens": 3600,
+      "compressed_tokens": 667,
+      "num_needle_tokens": 11,
+      "tau": 0.9,
+      "tier0_size": 35,
+      "tier1_size": 2048,
+      "needle_name": "code_var_mid",
+      "needle_description": "Code variable at mid position",
+      "needle_position": 600,
+      "needle_range": [
+        596,
+        606
+      ]
+    },
+    {
+      "configuration": "binary_equivalent",
+      "description": "H2O-style selection, budget=667 (matched to TTKV compressed count)",
+      "needle_survived": false,
+      "needle_pos_present": false,
+      "retrieval_prob": 0.0,
+      "compression_ratio": 5.397301349325337,
+      "total_tokens": 3600,
+      "compressed_tokens": 667,
+      "num_needle_tokens": 0,
+      "budget": 667,
+      "needle_name": "code_var_mid",
+      "needle_description": "Code variable at mid position",
+      "needle_position": 600,
+      "needle_range": [
+        596,
+        606
+      ]
+    },
+    {
+      "configuration": "full_ttkv",
+      "description": "auto_config + build_retention_mask, tau=0.9, position-sorted",
+      "needle_survived": true,
+      "needle_pos_present": true,
+      "retrieval_prob": 0.09898507595062256,
+      "compression_ratio": 5.357142857142857,
+      "total_tokens": 3600,
+      "compressed_tokens": 672,
+      "num_needle_tokens": 14,
+      "tau": 0.9,
+      "tier0_size": 38,
+      "tier1_size": 2048,
+      "needle_name": "number_mid",
+      "needle_description": "Numeric value at position 1200",
+      "needle_position": 1200,
+      "needle_range": [
+        1195,
+        1208
+      ]
+    },
+    {
+      "configuration": "no_retention_floor",
+      "description": "uniform retention=0.3, no needle protection",
+      "needle_survived": false,
+      "needle_pos_present": true,
+      "retrieval_prob": 0.007240111008286476,
+      "compression_ratio": 5.853658536585366,
+      "total_tokens": 3600,
+      "compressed_tokens": 615,
+      "num_needle_tokens": 3,
+      "tau": 0.9,
+      "tier0_size": 8,
+      "tier1_size": 2048,
+      "needle_name": "number_mid",
+      "needle_description": "Numeric value at position 1200",
+      "needle_position": 1200,
+      "needle_range": [
+        1195,
+        1208
+      ]
+    },
+    {
+      "configuration": "uniform_pooling",
+      "description": "uniform retention=0.5, no weighted pooling",
+      "needle_survived": false,
+      "needle_pos_present": true,
+      "retrieval_prob": 0.007315103895962238,
+      "compression_ratio": 5.853658536585366,
+      "total_tokens": 3600,
+      "compressed_tokens": 615,
+      "num_needle_tokens": 3,
+      "tau": 0.9,
+      "tier0_size": 8,
+      "tier1_size": 2048,
+      "needle_name": "number_mid",
+      "needle_description": "Numeric value at position 1200",
+      "needle_position": 1200,
+      "needle_range": [
+        1195,
+        1208
+      ]
+    },
+    {
+      "configuration": "no_position_sort",
+      "description": "tiers concatenated by priority, not position \u2014 original buggy version",
+      "needle_survived": true,
+      "needle_pos_present": true,
+      "retrieval_prob": 0.02025659754872322,
+      "compression_ratio": 5.357142857142857,
+      "total_tokens": 3600,
+      "compressed_tokens": 672,
+      "num_needle_tokens": 14,
+      "tau": 0.9,
+      "tier0_size": 38,
+      "tier1_size": 2048,
+      "needle_name": "number_mid",
+      "needle_description": "Numeric value at position 1200",
+      "needle_position": 1200,
+      "needle_range": [
+        1195,
+        1208
+      ]
+    },
+    {
+      "configuration": "binary_equivalent",
+      "description": "H2O-style selection, budget=672 (matched to TTKV compressed count)",
+      "needle_survived": false,
+      "needle_pos_present": false,
+      "retrieval_prob": 0.0,
+      "compression_ratio": 5.357142857142857,
+      "total_tokens": 3600,
+      "compressed_tokens": 672,
+      "num_needle_tokens": 0,
+      "budget": 672,
+      "needle_name": "number_mid",
+      "needle_description": "Numeric value at position 1200",
+      "needle_position": 1200,
+      "needle_range": [
+        1195,
+        1208
+      ]
+    },
+    {
+      "configuration": "full_ttkv",
+      "description": "auto_config + build_retention_mask, tau=0.9, position-sorted",
+      "needle_survived": true,
+      "needle_pos_present": true,
+      "retrieval_prob": 0.10189822316169739,
+      "compression_ratio": 5.373134328358209,
+      "total_tokens": 3600,
+      "compressed_tokens": 670,
+      "num_needle_tokens": 13,
+      "tau": 0.9,
+      "tier0_size": 37,
+      "tier1_size": 2048,
+      "needle_name": "name_early",
+      "needle_description": "Named entity at early position",
+      "needle_position": 100,
+      "needle_range": [
+        96,
+        108
+      ]
+    },
+    {
+      "configuration": "no_retention_floor",
+      "description": "uniform retention=0.3, no needle protection",
+      "needle_survived": false,
+      "needle_pos_present": true,
+      "retrieval_prob": 0.006464490666985512,
+      "compression_ratio": 5.853658536585366,
+      "total_tokens": 3600,
+      "compressed_tokens": 615,
+      "num_needle_tokens": 3,
+      "tau": 0.9,
+      "tier0_size": 8,
+      "tier1_size": 2048,
+      "needle_name": "name_early",
+      "needle_description": "Named entity at early position",
+      "needle_position": 100,
+      "needle_range": [
+        96,
+        108
+      ]
+    },
+    {
+      "configuration": "uniform_pooling",
+      "description": "uniform retention=0.5, no weighted pooling",
+      "needle_survived": false,
+      "needle_pos_present": true,
+      "retrieval_prob": 0.008818164467811584,
+      "compression_ratio": 5.853658536585366,
+      "total_tokens": 3600,
+      "compressed_tokens": 615,
+      "num_needle_tokens": 3,
+      "tau": 0.9,
+      "tier0_size": 8,
+      "tier1_size": 2048,
+      "needle_name": "name_early",
+      "needle_description": "Named entity at early position",
+      "needle_position": 100,
+      "needle_range": [
+        96,
+        108
+      ]
+    },
+    {
+      "configuration": "no_position_sort",
+      "description": "tiers concatenated by priority, not position \u2014 original buggy version",
+      "needle_survived": true,
+      "needle_pos_present": true,
+      "retrieval_prob": 0.019934751093387604,
+      "compression_ratio": 5.373134328358209,
+      "total_tokens": 3600,
+      "compressed_tokens": 670,
+      "num_needle_tokens": 13,
+      "tau": 0.9,
+      "tier0_size": 37,
+      "tier1_size": 2048,
+      "needle_name": "name_early",
+      "needle_description": "Named entity at early position",
+      "needle_position": 100,
+      "needle_range": [
+        96,
+        108
+      ]
+    },
+    {
+      "configuration": "binary_equivalent",
+      "description": "H2O-style selection, budget=670 (matched to TTKV compressed count)",
+      "needle_survived": false,
+      "needle_pos_present": false,
+      "retrieval_prob": 0.0,
+      "compression_ratio": 5.373134328358209,
+      "total_tokens": 3600,
+      "compressed_tokens": 670,
+      "num_needle_tokens": 0,
+      "budget": 670,
+      "needle_name": "name_early",
+      "needle_description": "Named entity at early position",
+      "needle_position": 100,
+      "needle_range": [
+        96,
+        108
+      ]
+    },
+    {
+      "configuration": "full_ttkv",
+      "description": "auto_config + build_retention_mask, tau=0.9, position-sorted",
+      "needle_survived": true,
+      "needle_pos_present": true,
+      "retrieval_prob": 0.1521909534931183,
+      "compression_ratio": 5.325443786982248,
+      "total_tokens": 3600,
+      "compressed_tokens": 676,
+      "num_needle_tokens": 17,
+      "tau": 0.9,
+      "tier0_size": 41,
+      "tier1_size": 2048,
+      "needle_name": "fact_late",
+      "needle_description": "Factual statement at position 1800",
+      "needle_position": 1800,
+      "needle_range": [
+        1794,
+        1810
+      ]
+    },
+    {
+      "configuration": "no_retention_floor",
+      "description": "uniform retention=0.3, no needle protection",
+      "needle_survived": false,
+      "needle_pos_present": true,
+      "retrieval_prob": 0.00847546849399805,
+      "compression_ratio": 5.853658536585366,
+      "total_tokens": 3600,
+      "compressed_tokens": 615,
+      "num_needle_tokens": 4,
+      "tau": 0.9,
+      "tier0_size": 8,
+      "tier1_size": 2048,
+      "needle_name": "fact_late",
+      "needle_description": "Factual statement at position 1800",
+      "needle_position": 1800,
+      "needle_range": [
+        1794,
+        1810
+      ]
+    },
+    {
+      "configuration": "uniform_pooling",
+      "description": "uniform retention=0.5, no weighted pooling",
+      "needle_survived": false,
+      "needle_pos_present": true,
+      "retrieval_prob": 0.006635264027863741,
+      "compression_ratio": 5.853658536585366,
+      "total_tokens": 3600,
+      "compressed_tokens": 615,
+      "num_needle_tokens": 4,
+      "tau": 0.9,
+      "tier0_size": 8,
+      "tier1_size": 2048,
+      "needle_name": "fact_late",
+      "needle_description": "Factual statement at position 1800",
+      "needle_position": 1800,
+      "needle_range": [
+        1794,
+        1810
+      ]
+    },
+    {
+      "configuration": "no_position_sort",
+      "description": "tiers concatenated by priority, not position \u2014 original buggy version",
+      "needle_survived": true,
+      "needle_pos_present": true,
+      "retrieval_prob": 0.045355409383773804,
+      "compression_ratio": 5.325443786982248,
+      "total_tokens": 3600,
+      "compressed_tokens": 676,
+      "num_needle_tokens": 17,
+      "tau": 0.9,
+      "tier0_size": 41,
+      "tier1_size": 2048,
+      "needle_name": "fact_late",
+      "needle_description": "Factual statement at position 1800",
+      "needle_position": 1800,
+      "needle_range": [
+        1794,
+        1810
+      ]
+    },
+    {
+      "configuration": "binary_equivalent",
+      "description": "H2O-style selection, budget=676 (matched to TTKV compressed count)",
+      "needle_survived": false,
+      "needle_pos_present": false,
+      "retrieval_prob": 0.0,
+      "compression_ratio": 5.325443786982248,
+      "total_tokens": 3600,
+      "compressed_tokens": 676,
+      "num_needle_tokens": 0,
+      "budget": 676,
+      "needle_name": "fact_late",
+      "needle_description": "Factual statement at position 1800",
+      "needle_position": 1800,
+      "needle_range": [
+        1794,
+        1810
+      ]
+    },
+    {
+      "configuration": "full_ttkv",
+      "description": "auto_config + build_retention_mask, tau=0.9, position-sorted",
+      "needle_survived": true,
+      "needle_pos_present": true,
+      "retrieval_prob": 0.15962223708629608,
+      "compression_ratio": 5.2631578947368425,
+      "total_tokens": 3600,
+      "compressed_tokens": 684,
+      "num_needle_tokens": 19,
+      "tau": 0.9,
+      "tier0_size": 44,
+      "tier1_size": 2048,
+      "needle_name": "mixed_late",
+      "needle_description": "Mixed content at position 2500",
+      "needle_position": 2500,
+      "needle_range": [
+        2493,
+        2512
+      ]
+    },
+    {
+      "configuration": "no_retention_floor",
+      "description": "uniform retention=0.3, no needle protection",
+      "needle_survived": false,
+      "needle_pos_present": true,
+      "retrieval_prob": 0.002235236344859004,
+      "compression_ratio": 5.853658536585366,
+      "total_tokens": 3600,
+      "compressed_tokens": 615,
+      "num_needle_tokens": 1,
+      "tau": 0.9,
+      "tier0_size": 8,
+      "tier1_size": 2048,
+      "needle_name": "mixed_late",
+      "needle_description": "Mixed content at position 2500",
+      "needle_position": 2500,
+      "needle_range": [
+        2493,
+        2512
+      ]
+    },
+    {
+      "configuration": "uniform_pooling",
+      "description": "uniform retention=0.5, no weighted pooling",
+      "needle_survived": false,
+      "needle_pos_present": true,
+      "retrieval_prob": 0.0019033311400562525,
+      "compression_ratio": 5.853658536585366,
+      "total_tokens": 3600,
+      "compressed_tokens": 615,
+      "num_needle_tokens": 1,
+      "tau": 0.9,
+      "tier0_size": 8,
+      "tier1_size": 2048,
+      "needle_name": "mixed_late",
+      "needle_description": "Mixed content at position 2500",
+      "needle_position": 2500,
+      "needle_range": [
+        2493,
+        2512
+      ]
+    },
+    {
+      "configuration": "no_position_sort",
+      "description": "tiers concatenated by priority, not position \u2014 original buggy version",
+      "needle_survived": true,
+      "needle_pos_present": true,
+      "retrieval_prob": 0.04663103073835373,
+      "compression_ratio": 5.2631578947368425,
+      "total_tokens": 3600,
+      "compressed_tokens": 684,
+      "num_needle_tokens": 19,
+      "tau": 0.9,
+      "tier0_size": 44,
+      "tier1_size": 2048,
+      "needle_name": "mixed_late",
+      "needle_description": "Mixed content at position 2500",
+      "needle_position": 2500,
+      "needle_range": [
+        2493,
+        2512
+      ]
+    },
+    {
+      "configuration": "binary_equivalent",
+      "description": "H2O-style selection, budget=684 (matched to TTKV compressed count)",
+      "needle_survived": false,
+      "needle_pos_present": false,
+      "retrieval_prob": 0.0,
+      "compression_ratio": 5.2631578947368425,
+      "total_tokens": 3600,
+      "compressed_tokens": 684,
+      "num_needle_tokens": 0,
+      "budget": 684,
+      "needle_name": "mixed_late",
+      "needle_description": "Mixed content at position 2500",
+      "needle_position": 2500,
+      "needle_range": [
+        2493,
+        2512
+      ]
+    }
+  ]
+}

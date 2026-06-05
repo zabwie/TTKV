@@ -103,8 +103,7 @@ def create_mock_retention(seq_len: int, num_named_entities: int = 20,
     return retention
 
 
-def compute_type_prior_retention(token_ids: torch.Tensor,
-                                alpha: float = 0.0) -> torch.Tensor:
+def compute_type_prior_retention(token_ids: torch.Tensor) -> torch.Tensor:
     batch_size, seq_len = token_ids.shape
 
     retention = create_mock_retention(seq_len)

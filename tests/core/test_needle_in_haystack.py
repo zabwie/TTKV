@@ -6,9 +6,6 @@ infrequently in long contexts. This catches catastrophic failures that
 average metrics (perplexity) miss.
 """
 
-import sys
-sys.path.insert(0, '../src')
-
 import torch
 import torch.nn.functional as F
 import numpy as np
@@ -43,7 +40,7 @@ def create_needle_context(seq_len, needle_position, needle_token_idx):
     return k, v, positions, token_ids, retention, needle_token_idx
 
 
-def test_needle_retrieval(seq_len, needle_position, tau):
+def run_needle_retrieval(seq_len, needle_position, tau):
     """Test if needle is retrievable after compression."""
     k, v, positions, token_ids, retention, needle_idx = create_needle_context(
         seq_len, needle_position, needle_position
@@ -120,7 +117,7 @@ def run_needle_tests():
     for seq_len, needle_pos, tau in configs:
         print(f"\nTest: {seq_len} tokens, needle at position {needle_pos}, τ={tau}")
         
-        result = test_needle_retrieval(seq_len, needle_pos, tau)
+        result = run_needle_retrieval(seq_len, needle_pos, tau)
         results.append(result)
         
         status = "✓ PASS" if result['needle_preserved'] and result['needle_prob_compressed'] > 0.01 else "✗ FAIL"

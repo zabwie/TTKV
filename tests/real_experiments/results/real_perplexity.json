@@ -1,0 +1,47 @@
+[
+  {
+    "tau": 0.0,
+    "samples": 80,
+    "ppl_uncompressed": 4062.761431860924,
+    "ppl_compressed": 4062.7587735891343,
+    "ppl_delta": -0.0026582717896417307,
+    "ppl_delta_pct": -6.543017192186264e-05,
+    "compression_ratio": 1.0
+  },
+  {
+    "tau": 0.7,
+    "samples": 80,
+    "ppl_uncompressed": 4062.761431860924,
+    "ppl_compressed": 4062.488251543045,
+    "ppl_delta": -0.273180317878996,
+    "ppl_delta_pct": -0.006724005887637546,
+    "compression_ratio": 1.0062510042332349
+  },
+  {
+    "tau": 0.8,
+    "samples": 80,
+    "ppl_uncompressed": 4062.761431860924,
+    "ppl_compressed": 4061.9541113376617,
+    "ppl_delta": -0.8073205232622058,
+    "ppl_delta_pct": -0.019871226425727327,
+    "compression_ratio": 1.0063019999795617
+  },
+  {
+    "tau": 0.9,
+    "samples": 80,
+    "ppl_uncompressed": 4062.761431860924,
+    "ppl_compressed": 4066.4820651054383,
+    "ppl_delta": 3.7206332445143744,
+    "ppl_delta_pct": 0.09157892499757635,
+    "compression_ratio": 1.0099794075103614
+  },
+  {
+    "tau": 0.95,
+    "samples": 80,
+    "ppl_uncompressed": 4062.761431860924,
+    "ppl_compressed": 4061.3783110141753,
+    "ppl_delta": -1.383120846748625,
+    "ppl_delta_pct": -0.03404386080614865,
+    "compression_ratio": 1.010135421733914
+  }
+]

@@ -7,9 +7,6 @@ Table 3 reports 0.14±0.03% quality loss for τ=0.90-0.95
 This script reruns experiments with consistent settings to determine the true value.
 """
 
-import sys
-sys.path.insert(0, '../src')
-
 import torch
 import torch.nn.functional as F
 import numpy as np

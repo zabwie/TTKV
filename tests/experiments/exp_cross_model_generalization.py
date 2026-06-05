@@ -10,9 +10,6 @@ This test provides critical evidence that the salience scorer captures SEMANTIC
 importance (not just GPT-2-specific attention patterns).
 """
 
-import sys
-sys.path.insert(0, '../src')
-
 import torch
 import torch.nn.functional as F
 import numpy as np

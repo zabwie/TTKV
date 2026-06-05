@@ -1,0 +1,1332 @@
+{
+  "2048": {
+    "Tiered (Ours)": {
+      "seq_len": 2048,
+      "method": "Tiered (Ours)",
+      "success_rate": 0.42857142857142855,
+      "avg_retrieval_prob": 0.18639985116362215,
+      "avg_compression": 2.9055540204476378,
+      "results": [
+        {
+          "needle_pos": 0,
+          "needle_preserved": true,
+          "retrieval_prob": 0.25194722414016724,
+          "exact_match": true,
+          "compression_ratio": 2.909090909090909,
+          "tokens_kept": 704,
+          "retrieval_rank": 1
+        },
+        {
+          "needle_pos": 256,
+          "needle_preserved": false,
+          "retrieval_prob": 2.3631839951576694e-07,
+          "exact_match": true,
+          "compression_ratio": 2.9049645390070924,
+          "tokens_kept": 705,
+          "retrieval_rank": 705
+        },
+        {
+          "needle_pos": 512,
+          "needle_preserved": false,
+          "retrieval_prob": 0.0002575439866632223,
+          "exact_match": true,
+          "compression_ratio": 2.9049645390070924,
+          "tokens_kept": 705,
+          "retrieval_rank": 705
+        },
+        {
+          "needle_pos": 1024,
+          "needle_preserved": true,
+          "retrieval_prob": 0.05962526053190231,
+          "exact_match": true,
+          "compression_ratio": 2.9049645390070924,
+          "tokens_kept": 705,
+          "retrieval_rank": 1
+        },
+        {
+          "needle_pos": 1536,
+          "needle_preserved": false,
+          "retrieval_prob": 9.232517186319456e-06,
+          "exact_match": true,
+          "compression_ratio": 2.9049645390070924,
+          "tokens_kept": 705,
+          "retrieval_rank": 705
+        },
+        {
+          "needle_pos": 1792,
+          "needle_preserved": false,
+          "retrieval_prob": 0.0006513208500109613,
+          "exact_match": true,
+          "compression_ratio": 2.9049645390070924,
+          "tokens_kept": 705,
+          "retrieval_rank": 679
+        },
+        {
+          "needle_pos": 2000,
+          "needle_preserved": true,
+          "retrieval_prob": 0.9923081398010254,
+          "exact_match": true,
+          "compression_ratio": 2.9049645390070924,
+          "tokens_kept": 705,
+          "retrieval_rank": 1
+        }
+      ]
+    },
+    "H2O": {
+      "seq_len": 2048,
+      "method": "H2O",
+      "success_rate": 0.42857142857142855,
+      "avg_retrieval_prob": 0.06432101164029826,
+      "avg_compression": 1.0,
+      "results": [
+        {
+          "needle_pos": 0,
+          "needle_preserved": false,
+          "retrieval_prob": 8.544074808014557e-05,
+          "exact_match": true,
+          "compression_ratio": 1.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 2047
+        },
+        {
+          "needle_pos": 256,
+          "needle_preserved": false,
+          "retrieval_prob": 2.022512823884881e-08,
+          "exact_match": true,
+          "compression_ratio": 1.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 2048
+        },
+        {
+          "needle_pos": 512,
+          "needle_preserved": false,
+          "retrieval_prob": 0.0025577323976904154,
+          "exact_match": true,
+          "compression_ratio": 1.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 1
+        },
+        {
+          "needle_pos": 1024,
+          "needle_preserved": true,
+          "retrieval_prob": 0.008083129301667213,
+          "exact_match": true,
+          "compression_ratio": 1.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 1
+        },
+        {
+          "needle_pos": 1536,
+          "needle_preserved": true,
+          "retrieval_prob": 0.43239596486091614,
+          "exact_match": true,
+          "compression_ratio": 1.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 1
+        },
+        {
+          "needle_pos": 1792,
+          "needle_preserved": true,
+          "retrieval_prob": 0.0069145564921200275,
+          "exact_match": true,
+          "compression_ratio": 1.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 1
+        },
+        {
+          "needle_pos": 2000,
+          "needle_preserved": false,
+          "retrieval_prob": 0.00021023745648562908,
+          "exact_match": true,
+          "compression_ratio": 1.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 1799
+        }
+      ]
+    },
+    "ScissorHands": {
+      "seq_len": 2048,
+      "method": "ScissorHands",
+      "success_rate": 0.42857142857142855,
+      "avg_retrieval_prob": 0.1519061718380174,
+      "avg_compression": 1.0,
+      "results": [
+        {
+          "needle_pos": 0,
+          "needle_preserved": true,
+          "retrieval_prob": 0.8932321071624756,
+          "exact_match": true,
+          "compression_ratio": 1.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 1
+        },
+        {
+          "needle_pos": 256,
+          "needle_preserved": false,
+          "retrieval_prob": 0.00412400346249342,
+          "exact_match": true,
+          "compression_ratio": 1.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 1
+        },
+        {
+          "needle_pos": 512,
+          "needle_preserved": false,
+          "retrieval_prob": 0.0002933512441813946,
+          "exact_match": true,
+          "compression_ratio": 1.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 1616
+        },
+        {
+          "needle_pos": 1024,
+          "needle_preserved": false,
+          "retrieval_prob": 3.2170999020308955e-07,
+          "exact_match": true,
+          "compression_ratio": 1.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 2048
+        },
+        {
+          "needle_pos": 1536,
+          "needle_preserved": true,
+          "retrieval_prob": 0.11105402559041977,
+          "exact_match": true,
+          "compression_ratio": 1.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 1
+        },
+        {
+          "needle_pos": 1792,
+          "needle_preserved": false,
+          "retrieval_prob": 0.0017729124519973993,
+          "exact_match": true,
+          "compression_ratio": 1.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 2
+        },
+        {
+          "needle_pos": 2000,
+          "needle_preserved": true,
+          "retrieval_prob": 0.052866481244564056,
+          "exact_match": true,
+          "compression_ratio": 1.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 1
+        }
+      ]
+    }
+  },
+  "4096": {
+    "Tiered (Ours)": {
+      "seq_len": 4096,
+      "method": "Tiered (Ours)",
+      "success_rate": 0.2857142857142857,
+      "avg_retrieval_prob": 0.14466841221763257,
+      "avg_compression": 4.918011160508159,
+      "results": [
+        {
+          "needle_pos": 0,
+          "needle_preserved": false,
+          "retrieval_prob": 2.104748318743077e-06,
+          "exact_match": true,
+          "compression_ratio": 4.923076923076923,
+          "tokens_kept": 832,
+          "retrieval_rank": 832
+        },
+        {
+          "needle_pos": 512,
+          "needle_preserved": true,
+          "retrieval_prob": 0.005235851276665926,
+          "exact_match": true,
+          "compression_ratio": 4.917166866746698,
+          "tokens_kept": 833,
+          "retrieval_rank": 2
+        },
+        {
+          "needle_pos": 1024,
+          "needle_preserved": false,
+          "retrieval_prob": 0.004277002066373825,
+          "exact_match": true,
+          "compression_ratio": 4.917166866746698,
+          "tokens_kept": 833,
+          "retrieval_rank": 1
+        },
+        {
+          "needle_pos": 2048,
+          "needle_preserved": true,
+          "retrieval_prob": 0.9995377063751221,
+          "exact_match": true,
+          "compression_ratio": 4.917166866746698,
+          "tokens_kept": 833,
+          "retrieval_rank": 1
+        },
+        {
+          "needle_pos": 3072,
+          "needle_preserved": false,
+          "retrieval_prob": 0.003597460687160492,
+          "exact_match": true,
+          "compression_ratio": 4.917166866746698,
+          "tokens_kept": 833,
+          "retrieval_rank": 3
+        },
+        {
+          "needle_pos": 3584,
+          "needle_preserved": false,
+          "retrieval_prob": 2.046533700195141e-05,
+          "exact_match": true,
+          "compression_ratio": 4.917166866746698,
+          "tokens_kept": 833,
+          "retrieval_rank": 833
+        },
+        {
+          "needle_pos": 4000,
+          "needle_preserved": false,
+          "retrieval_prob": 8.295032785099465e-06,
+          "exact_match": true,
+          "compression_ratio": 4.917166866746698,
+          "tokens_kept": 833,
+          "retrieval_rank": 833
+        }
+      ]
+    },
+    "H2O": {
+      "seq_len": 4096,
+      "method": "H2O",
+      "success_rate": 0.5714285714285714,
+      "avg_retrieval_prob": 0.008279279805719852,
+      "avg_compression": 2.0,
+      "results": [
+        {
+          "needle_pos": 0,
+          "needle_preserved": false,
+          "retrieval_prob": 0.0,
+          "exact_match": false,
+          "compression_ratio": 2.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": null
+        },
+        {
+          "needle_pos": 512,
+          "needle_preserved": false,
+          "retrieval_prob": 0.0,
+          "exact_match": false,
+          "compression_ratio": 2.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": null
+        },
+        {
+          "needle_pos": 1024,
+          "needle_preserved": false,
+          "retrieval_prob": 0.0,
+          "exact_match": false,
+          "compression_ratio": 2.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": null
+        },
+        {
+          "needle_pos": 2048,
+          "needle_preserved": true,
+          "retrieval_prob": 0.007810593582689762,
+          "exact_match": false,
+          "compression_ratio": 2.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": null
+        },
+        {
+          "needle_pos": 3072,
+          "needle_preserved": true,
+          "retrieval_prob": 0.0159602053463459,
+          "exact_match": false,
+          "compression_ratio": 2.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": null
+        },
+        {
+          "needle_pos": 3584,
+          "needle_preserved": true,
+          "retrieval_prob": 0.01647944375872612,
+          "exact_match": false,
+          "compression_ratio": 2.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": null
+        },
+        {
+          "needle_pos": 4000,
+          "needle_preserved": true,
+          "retrieval_prob": 0.017704715952277184,
+          "exact_match": false,
+          "compression_ratio": 2.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": null
+        }
+      ]
+    },
+    "ScissorHands": {
+      "seq_len": 4096,
+      "method": "ScissorHands",
+      "success_rate": 0.2857142857142857,
+      "avg_retrieval_prob": 0.10427502312404613,
+      "avg_compression": 2.0,
+      "results": [
+        {
+          "needle_pos": 0,
+          "needle_preserved": false,
+          "retrieval_prob": 6.156944891699823e-06,
+          "exact_match": true,
+          "compression_ratio": 2.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 2048
+        },
+        {
+          "needle_pos": 512,
+          "needle_preserved": false,
+          "retrieval_prob": 0.0016445580404251814,
+          "exact_match": true,
+          "compression_ratio": 2.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 5
+        },
+        {
+          "needle_pos": 1024,
+          "needle_preserved": false,
+          "retrieval_prob": 0.00038117991061881185,
+          "exact_match": true,
+          "compression_ratio": 2.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 1256
+        },
+        {
+          "needle_pos": 2048,
+          "needle_preserved": false,
+          "retrieval_prob": 0.0018589566461741924,
+          "exact_match": true,
+          "compression_ratio": 2.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 3
+        },
+        {
+          "needle_pos": 3072,
+          "needle_preserved": true,
+          "retrieval_prob": 0.507836639881134,
+          "exact_match": true,
+          "compression_ratio": 2.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 1
+        },
+        {
+          "needle_pos": 3584,
+          "needle_preserved": true,
+          "retrieval_prob": 0.21778644621372223,
+          "exact_match": true,
+          "compression_ratio": 2.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 1
+        },
+        {
+          "needle_pos": 4000,
+          "needle_preserved": false,
+          "retrieval_prob": 0.0004112242313567549,
+          "exact_match": true,
+          "compression_ratio": 2.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 1172
+        }
+      ]
+    }
+  },
+  "8192": {
+    "Tiered (Ours)": {
+      "seq_len": 8192,
+      "method": "Tiered (Ours)",
+      "success_rate": 0.42857142857142855,
+      "avg_retrieval_prob": 0.0780765584636031,
+      "avg_compression": 7.523485427228743,
+      "results": [
+        {
+          "needle_pos": 0,
+          "needle_preserved": false,
+          "retrieval_prob": 6.059465522412211e-05,
+          "exact_match": true,
+          "compression_ratio": 7.529411764705882,
+          "tokens_kept": 1088,
+          "retrieval_rank": 1088
+        },
+        {
+          "needle_pos": 1024,
+          "needle_preserved": true,
+          "retrieval_prob": 0.021599125117063522,
+          "exact_match": true,
+          "compression_ratio": 7.522497704315886,
+          "tokens_kept": 1089,
+          "retrieval_rank": 1
+        },
+        {
+          "needle_pos": 2048,
+          "needle_preserved": false,
+          "retrieval_prob": 1.2108323517168174e-06,
+          "exact_match": true,
+          "compression_ratio": 7.522497704315886,
+          "tokens_kept": 1089,
+          "retrieval_rank": 1089
+        },
+        {
+          "needle_pos": 4096,
+          "needle_preserved": true,
+          "retrieval_prob": 0.3287561237812042,
+          "exact_match": true,
+          "compression_ratio": 7.522497704315886,
+          "tokens_kept": 1089,
+          "retrieval_rank": 1
+        },
+        {
+          "needle_pos": 6144,
+          "needle_preserved": true,
+          "retrieval_prob": 0.1951666623353958,
+          "exact_match": true,
+          "compression_ratio": 7.522497704315886,
+          "tokens_kept": 1089,
+          "retrieval_rank": 1
+        },
+        {
+          "needle_pos": 7168,
+          "needle_preserved": false,
+          "retrieval_prob": 0.0003452820237725973,
+          "exact_match": true,
+          "compression_ratio": 7.522497704315886,
+          "tokens_kept": 1089,
+          "retrieval_rank": 1077
+        },
+        {
+          "needle_pos": 8000,
+          "needle_preserved": false,
+          "retrieval_prob": 0.0006069105002097785,
+          "exact_match": true,
+          "compression_ratio": 7.522497704315886,
+          "tokens_kept": 1089,
+          "retrieval_rank": 1007
+        }
+      ]
+    },
+    "H2O": {
+      "seq_len": 8192,
+      "method": "H2O",
+      "success_rate": 0.2857142857142857,
+      "avg_retrieval_prob": 0.0020546982330935343,
+      "avg_compression": 4.0,
+      "results": [
+        {
+          "needle_pos": 0,
+          "needle_preserved": false,
+          "retrieval_prob": 0.0,
+          "exact_match": false,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": null
+        },
+        {
+          "needle_pos": 1024,
+          "needle_preserved": false,
+          "retrieval_prob": 0.0,
+          "exact_match": false,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": null
+        },
+        {
+          "needle_pos": 2048,
+          "needle_preserved": false,
+          "retrieval_prob": 0.0,
+          "exact_match": false,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": null
+        },
+        {
+          "needle_pos": 4096,
+          "needle_preserved": true,
+          "retrieval_prob": 0.007395816035568714,
+          "exact_match": false,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": null
+        },
+        {
+          "needle_pos": 6144,
+          "needle_preserved": true,
+          "retrieval_prob": 0.006987071596086025,
+          "exact_match": false,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": null
+        },
+        {
+          "needle_pos": 7168,
+          "needle_preserved": false,
+          "retrieval_prob": 0.0,
+          "exact_match": false,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": null
+        },
+        {
+          "needle_pos": 8000,
+          "needle_preserved": false,
+          "retrieval_prob": 0.0,
+          "exact_match": false,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": null
+        }
+      ]
+    },
+    "ScissorHands": {
+      "seq_len": 8192,
+      "method": "ScissorHands",
+      "success_rate": 0.14285714285714285,
+      "avg_retrieval_prob": 0.0037639537340753903,
+      "avg_compression": 4.0,
+      "results": [
+        {
+          "needle_pos": 0,
+          "needle_preserved": true,
+          "retrieval_prob": 0.023609837517142296,
+          "exact_match": true,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 1
+        },
+        {
+          "needle_pos": 1024,
+          "needle_preserved": false,
+          "retrieval_prob": 0.0019325445173308253,
+          "exact_match": true,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 2
+        },
+        {
+          "needle_pos": 2048,
+          "needle_preserved": false,
+          "retrieval_prob": 6.783743174310075e-06,
+          "exact_match": true,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 2048
+        },
+        {
+          "needle_pos": 4096,
+          "needle_preserved": false,
+          "retrieval_prob": 2.2525437088916078e-05,
+          "exact_match": true,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 2048
+        },
+        {
+          "needle_pos": 6144,
+          "needle_preserved": false,
+          "retrieval_prob": 3.625111503424705e-06,
+          "exact_match": true,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 2048
+        },
+        {
+          "needle_pos": 7168,
+          "needle_preserved": false,
+          "retrieval_prob": 8.449737265436852e-07,
+          "exact_match": true,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 2048
+        },
+        {
+          "needle_pos": 8000,
+          "needle_preserved": false,
+          "retrieval_prob": 0.0007715148385614157,
+          "exact_match": true,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 252
+        }
+      ]
+    }
+  },
+  "12288": {
+    "Tiered (Ours)": {
+      "seq_len": 12288,
+      "method": "Tiered (Ours)",
+      "success_rate": 0.42857142857142855,
+      "avg_retrieval_prob": 0.004500916455104483,
+      "avg_compression": 9.13703057431151,
+      "results": [
+        {
+          "needle_pos": 0,
+          "needle_preserved": false,
+          "retrieval_prob": 5.312458142725518e-06,
+          "exact_match": true,
+          "compression_ratio": 9.142857142857142,
+          "tokens_kept": 1344,
+          "retrieval_rank": 1344
+        },
+        {
+          "needle_pos": 2048,
+          "needle_preserved": true,
+          "retrieval_prob": 0.005053524859249592,
+          "exact_match": true,
+          "compression_ratio": 9.136059479553904,
+          "tokens_kept": 1345,
+          "retrieval_rank": 1
+        },
+        {
+          "needle_pos": 4096,
+          "needle_preserved": false,
+          "retrieval_prob": 1.623786738491617e-05,
+          "exact_match": true,
+          "compression_ratio": 9.136059479553904,
+          "tokens_kept": 1345,
+          "retrieval_rank": 1345
+        },
+        {
+          "needle_pos": 6144,
+          "needle_preserved": false,
+          "retrieval_prob": 0.00012345837603788823,
+          "exact_match": true,
+          "compression_ratio": 9.136059479553904,
+          "tokens_kept": 1345,
+          "retrieval_rank": 1345
+        },
+        {
+          "needle_pos": 8192,
+          "needle_preserved": false,
+          "retrieval_prob": 2.0217164546920685e-06,
+          "exact_match": true,
+          "compression_ratio": 9.136059479553904,
+          "tokens_kept": 1345,
+          "retrieval_rank": 1345
+        },
+        {
+          "needle_pos": 10240,
+          "needle_preserved": true,
+          "retrieval_prob": 0.017136557027697563,
+          "exact_match": true,
+          "compression_ratio": 9.136059479553904,
+          "tokens_kept": 1345,
+          "retrieval_rank": 1
+        },
+        {
+          "needle_pos": 12000,
+          "needle_preserved": true,
+          "retrieval_prob": 0.009169302880764008,
+          "exact_match": true,
+          "compression_ratio": 9.136059479553904,
+          "tokens_kept": 1345,
+          "retrieval_rank": 1
+        }
+      ]
+    },
+    "H2O": {
+      "seq_len": 12288,
+      "method": "H2O",
+      "success_rate": 0.14285714285714285,
+      "avg_retrieval_prob": 0.0026445016597530673,
+      "avg_compression": 6.0,
+      "results": [
+        {
+          "needle_pos": 0,
+          "needle_preserved": false,
+          "retrieval_prob": 0.0,
+          "exact_match": false,
+          "compression_ratio": 6.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": null
+        },
+        {
+          "needle_pos": 2048,
+          "needle_preserved": false,
+          "retrieval_prob": 0.0,
+          "exact_match": false,
+          "compression_ratio": 6.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": null
+        },
+        {
+          "needle_pos": 4096,
+          "needle_preserved": false,
+          "retrieval_prob": 0.0,
+          "exact_match": false,
+          "compression_ratio": 6.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": null
+        },
+        {
+          "needle_pos": 6144,
+          "needle_preserved": false,
+          "retrieval_prob": 0.0037981870118528605,
+          "exact_match": false,
+          "compression_ratio": 6.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": null
+        },
+        {
+          "needle_pos": 8192,
+          "needle_preserved": true,
+          "retrieval_prob": 0.01471332460641861,
+          "exact_match": false,
+          "compression_ratio": 6.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": null
+        },
+        {
+          "needle_pos": 10240,
+          "needle_preserved": false,
+          "retrieval_prob": 0.0,
+          "exact_match": false,
+          "compression_ratio": 6.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": null
+        },
+        {
+          "needle_pos": 12000,
+          "needle_preserved": false,
+          "retrieval_prob": 0.0,
+          "exact_match": false,
+          "compression_ratio": 6.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": null
+        }
+      ]
+    },
+    "ScissorHands": {
+      "seq_len": 12288,
+      "method": "ScissorHands",
+      "success_rate": 0.2857142857142857,
+      "avg_retrieval_prob": 0.01170366946223757,
+      "avg_compression": 6.0,
+      "results": [
+        {
+          "needle_pos": 0,
+          "needle_preserved": true,
+          "retrieval_prob": 0.04805221036076546,
+          "exact_match": true,
+          "compression_ratio": 6.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 1
+        },
+        {
+          "needle_pos": 2048,
+          "needle_preserved": false,
+          "retrieval_prob": 0.00042637510341592133,
+          "exact_match": true,
+          "compression_ratio": 6.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 1099
+        },
+        {
+          "needle_pos": 4096,
+          "needle_preserved": false,
+          "retrieval_prob": 2.5994340830948204e-06,
+          "exact_match": true,
+          "compression_ratio": 6.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 2048
+        },
+        {
+          "needle_pos": 6144,
+          "needle_preserved": false,
+          "retrieval_prob": 0.0022994831670075655,
+          "exact_match": true,
+          "compression_ratio": 6.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 1
+        },
+        {
+          "needle_pos": 8192,
+          "needle_preserved": false,
+          "retrieval_prob": 6.63389073451981e-05,
+          "exact_match": true,
+          "compression_ratio": 6.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 2048
+        },
+        {
+          "needle_pos": 10240,
+          "needle_preserved": true,
+          "retrieval_prob": 0.03107866458594799,
+          "exact_match": true,
+          "compression_ratio": 6.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 1
+        },
+        {
+          "needle_pos": 12000,
+          "needle_preserved": false,
+          "retrieval_prob": 1.4677097759374647e-08,
+          "exact_match": true,
+          "compression_ratio": 6.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 2048
+        }
+      ]
+    }
+  },
+  "type_comparison": {
+    "Passkey": {
+      "Tiered (Ours)": [
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 0,
+          "method": "Tiered (Ours)",
+          "needle_preserved": false,
+          "retrieval_prob": 7.040927448542789e-05,
+          "exact_match": true,
+          "compression_ratio": 7.529411764705882,
+          "tokens_kept": 1088,
+          "retrieval_rank": 1088
+        },
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 1024,
+          "method": "Tiered (Ours)",
+          "needle_preserved": false,
+          "retrieval_prob": 1.943493998624035e-06,
+          "exact_match": true,
+          "compression_ratio": 7.522497704315886,
+          "tokens_kept": 1089,
+          "retrieval_rank": 1089
+        },
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 4096,
+          "method": "Tiered (Ours)",
+          "needle_preserved": false,
+          "retrieval_prob": 0.0013817747822031379,
+          "exact_match": true,
+          "compression_ratio": 7.522497704315886,
+          "tokens_kept": 1089,
+          "retrieval_rank": 53
+        },
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 7168,
+          "method": "Tiered (Ours)",
+          "needle_preserved": true,
+          "retrieval_prob": 0.04106825217604637,
+          "exact_match": true,
+          "compression_ratio": 7.522497704315886,
+          "tokens_kept": 1089,
+          "retrieval_rank": 1
+        }
+      ],
+      "H2O": [
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 0,
+          "method": "H2O",
+          "needle_preserved": false,
+          "retrieval_prob": 0.0,
+          "exact_match": false,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": null
+        },
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 1024,
+          "method": "H2O",
+          "needle_preserved": false,
+          "retrieval_prob": 0.0,
+          "exact_match": false,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": null
+        },
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 4096,
+          "method": "H2O",
+          "needle_preserved": true,
+          "retrieval_prob": 0.006523766089230776,
+          "exact_match": false,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": null
+        },
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 7168,
+          "method": "H2O",
+          "needle_preserved": false,
+          "retrieval_prob": 0.0,
+          "exact_match": false,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": null
+        }
+      ],
+      "ScissorHands": [
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 0,
+          "method": "ScissorHands",
+          "needle_preserved": false,
+          "retrieval_prob": 9.085295005206717e-08,
+          "exact_match": true,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 2048
+        },
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 1024,
+          "method": "ScissorHands",
+          "needle_preserved": false,
+          "retrieval_prob": 2.5131912479992025e-06,
+          "exact_match": true,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 2048
+        },
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 4096,
+          "method": "ScissorHands",
+          "needle_preserved": true,
+          "retrieval_prob": 0.020363347604870796,
+          "exact_match": true,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 1
+        },
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 7168,
+          "method": "ScissorHands",
+          "needle_preserved": true,
+          "retrieval_prob": 0.009979208000004292,
+          "exact_match": true,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 1
+        }
+      ]
+    },
+    "Code": {
+      "Tiered (Ours)": [
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 0,
+          "method": "Tiered (Ours)",
+          "needle_preserved": true,
+          "retrieval_prob": 0.09604088217020035,
+          "exact_match": true,
+          "compression_ratio": 7.529411764705882,
+          "tokens_kept": 1088,
+          "retrieval_rank": 1
+        },
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 1024,
+          "method": "Tiered (Ours)",
+          "needle_preserved": false,
+          "retrieval_prob": 0.00015879546117503196,
+          "exact_match": true,
+          "compression_ratio": 7.522497704315886,
+          "tokens_kept": 1089,
+          "retrieval_rank": 1089
+        },
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 4096,
+          "method": "Tiered (Ours)",
+          "needle_preserved": false,
+          "retrieval_prob": 8.0191648521577e-06,
+          "exact_match": true,
+          "compression_ratio": 7.522497704315886,
+          "tokens_kept": 1089,
+          "retrieval_rank": 1089
+        },
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 7168,
+          "method": "Tiered (Ours)",
+          "needle_preserved": false,
+          "retrieval_prob": 0.00045489141484722495,
+          "exact_match": true,
+          "compression_ratio": 7.522497704315886,
+          "tokens_kept": 1089,
+          "retrieval_rank": 1079
+        }
+      ],
+      "H2O": [
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 0,
+          "method": "H2O",
+          "needle_preserved": false,
+          "retrieval_prob": 0.0,
+          "exact_match": false,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": null
+        },
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 1024,
+          "method": "H2O",
+          "needle_preserved": false,
+          "retrieval_prob": 0.0,
+          "exact_match": false,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": null
+        },
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 4096,
+          "method": "H2O",
+          "needle_preserved": true,
+          "retrieval_prob": 0.007547575980424881,
+          "exact_match": false,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": null
+        },
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 7168,
+          "method": "H2O",
+          "needle_preserved": false,
+          "retrieval_prob": 0.0,
+          "exact_match": false,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": null
+        }
+      ],
+      "ScissorHands": [
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 0,
+          "method": "ScissorHands",
+          "needle_preserved": true,
+          "retrieval_prob": 0.02091463841497898,
+          "exact_match": true,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 1
+        },
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 1024,
+          "method": "ScissorHands",
+          "needle_preserved": false,
+          "retrieval_prob": 0.002129452070221305,
+          "exact_match": true,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 2
+        },
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 4096,
+          "method": "ScissorHands",
+          "needle_preserved": true,
+          "retrieval_prob": 0.13954569399356842,
+          "exact_match": true,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 1
+        },
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 7168,
+          "method": "ScissorHands",
+          "needle_preserved": false,
+          "retrieval_prob": 0.00014323709183372557,
+          "exact_match": true,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 2011
+        }
+      ]
+    },
+    "Fact": {
+      "Tiered (Ours)": [
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 0,
+          "method": "Tiered (Ours)",
+          "needle_preserved": false,
+          "retrieval_prob": 4.478603386814939e-06,
+          "exact_match": true,
+          "compression_ratio": 7.529411764705882,
+          "tokens_kept": 1088,
+          "retrieval_rank": 1088
+        },
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 1024,
+          "method": "Tiered (Ours)",
+          "needle_preserved": true,
+          "retrieval_prob": 0.755806565284729,
+          "exact_match": true,
+          "compression_ratio": 7.522497704315886,
+          "tokens_kept": 1089,
+          "retrieval_rank": 1
+        },
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 4096,
+          "method": "Tiered (Ours)",
+          "needle_preserved": false,
+          "retrieval_prob": 1.881662137748208e-05,
+          "exact_match": true,
+          "compression_ratio": 7.522497704315886,
+          "tokens_kept": 1089,
+          "retrieval_rank": 1089
+        },
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 7168,
+          "method": "Tiered (Ours)",
+          "needle_preserved": true,
+          "retrieval_prob": 0.35458481311798096,
+          "exact_match": true,
+          "compression_ratio": 7.522497704315886,
+          "tokens_kept": 1089,
+          "retrieval_rank": 1
+        }
+      ],
+      "H2O": [
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 0,
+          "method": "H2O",
+          "needle_preserved": false,
+          "retrieval_prob": 0.0,
+          "exact_match": false,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": null
+        },
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 1024,
+          "method": "H2O",
+          "needle_preserved": false,
+          "retrieval_prob": 0.0,
+          "exact_match": false,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": null
+        },
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 4096,
+          "method": "H2O",
+          "needle_preserved": true,
+          "retrieval_prob": 0.008886364288628101,
+          "exact_match": false,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": null
+        },
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 7168,
+          "method": "H2O",
+          "needle_preserved": false,
+          "retrieval_prob": 0.0,
+          "exact_match": false,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": null
+        }
+      ],
+      "ScissorHands": [
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 0,
+          "method": "ScissorHands",
+          "needle_preserved": false,
+          "retrieval_prob": 0.00016983365640044212,
+          "exact_match": true,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 1939
+        },
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 1024,
+          "method": "ScissorHands",
+          "needle_preserved": false,
+          "retrieval_prob": 0.00035463040694594383,
+          "exact_match": true,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 1234
+        },
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 4096,
+          "method": "ScissorHands",
+          "needle_preserved": false,
+          "retrieval_prob": 6.975624700089611e-08,
+          "exact_match": true,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 2048
+        },
+        {
+          "needle_type": "passkey",
+          "seq_len": 8192,
+          "needle_pos": 7168,
+          "method": "ScissorHands",
+          "needle_preserved": true,
+          "retrieval_prob": 0.04801204800605774,
+          "exact_match": true,
+          "compression_ratio": 4.0,
+          "tokens_kept": 2048,
+          "retrieval_rank": 1
+        }
+      ]
+    }
+  }
+}

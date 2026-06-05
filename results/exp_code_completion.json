@@ -1,0 +1,167 @@
+[
+  {
+    "method": "Tiered (Ours)",
+    "seq_len": 2048,
+    "num_variables": 3,
+    "variables_preserved": 3,
+    "exact_recall": 1.0,
+    "syntax_preservation": 1.0,
+    "pass_at_1": true,
+    "compression_ratio": 2.909090909090909,
+    "tokens_kept": 704
+  },
+  {
+    "method": "H2O",
+    "seq_len": 2048,
+    "num_variables": 3,
+    "variables_preserved": 3,
+    "exact_recall": 1.0,
+    "syntax_preservation": 1.0,
+    "pass_at_1": true,
+    "compression_ratio": 1.0,
+    "tokens_kept": 2048
+  },
+  {
+    "method": "ScissorHands",
+    "seq_len": 2048,
+    "num_variables": 3,
+    "variables_preserved": 3,
+    "exact_recall": 1.0,
+    "syntax_preservation": 1.0,
+    "pass_at_1": true,
+    "compression_ratio": 1.0,
+    "tokens_kept": 2048
+  },
+  {
+    "method": "Tiered (Ours)",
+    "seq_len": 4096,
+    "num_variables": 5,
+    "variables_preserved": 5,
+    "exact_recall": 1.0,
+    "syntax_preservation": 1.0,
+    "pass_at_1": true,
+    "compression_ratio": 4.917166866746698,
+    "tokens_kept": 833
+  },
+  {
+    "method": "H2O",
+    "seq_len": 4096,
+    "num_variables": 5,
+    "variables_preserved": 0,
+    "exact_recall": 0.0,
+    "syntax_preservation": 0.0,
+    "pass_at_1": false,
+    "compression_ratio": 2.0,
+    "tokens_kept": 2048
+  },
+  {
+    "method": "ScissorHands",
+    "seq_len": 4096,
+    "num_variables": 5,
+    "variables_preserved": 5,
+    "exact_recall": 1.0,
+    "syntax_preservation": 1.0,
+    "pass_at_1": true,
+    "compression_ratio": 2.0,
+    "tokens_kept": 2048
+  },
+  {
+    "method": "Tiered (Ours)",
+    "seq_len": 8192,
+    "num_variables": 5,
+    "variables_preserved": 5,
+    "exact_recall": 1.0,
+    "syntax_preservation": 1.0,
+    "pass_at_1": true,
+    "compression_ratio": 7.508707607699359,
+    "tokens_kept": 1091
+  },
+  {
+    "method": "H2O",
+    "seq_len": 8192,
+    "num_variables": 5,
+    "variables_preserved": 0,
+    "exact_recall": 0.0,
+    "syntax_preservation": 0.0,
+    "pass_at_1": false,
+    "compression_ratio": 4.0,
+    "tokens_kept": 2048
+  },
+  {
+    "method": "ScissorHands",
+    "seq_len": 8192,
+    "num_variables": 5,
+    "variables_preserved": 2,
+    "exact_recall": 1.0,
+    "syntax_preservation": 0.4,
+    "pass_at_1": false,
+    "compression_ratio": 4.0,
+    "tokens_kept": 2048
+  },
+  {
+    "method": "Tiered (Ours)",
+    "seq_len": 12288,
+    "num_variables": 7,
+    "variables_preserved": 7,
+    "exact_recall": 1.0,
+    "syntax_preservation": 1.0,
+    "pass_at_1": true,
+    "compression_ratio": 9.11572700296736,
+    "tokens_kept": 1348
+  },
+  {
+    "method": "H2O",
+    "seq_len": 12288,
+    "num_variables": 7,
+    "variables_preserved": 0,
+    "exact_recall": 0.0,
+    "syntax_preservation": 0.0,
+    "pass_at_1": false,
+    "compression_ratio": 6.0,
+    "tokens_kept": 2048
+  },
+  {
+    "method": "ScissorHands",
+    "seq_len": 12288,
+    "num_variables": 7,
+    "variables_preserved": 3,
+    "exact_recall": 1.0,
+    "syntax_preservation": 0.42857142857142855,
+    "pass_at_1": false,
+    "compression_ratio": 6.0,
+    "tokens_kept": 2048
+  },
+  {
+    "method": "Tiered (Ours)",
+    "seq_len": 16384,
+    "num_variables": 7,
+    "variables_preserved": 1,
+    "exact_recall": 1.0,
+    "syntax_preservation": 0.14285714285714285,
+    "pass_at_1": false,
+    "compression_ratio": 10.214463840399002,
+    "tokens_kept": 1604
+  },
+  {
+    "method": "H2O",
+    "seq_len": 16384,
+    "num_variables": 7,
+    "variables_preserved": 0,
+    "exact_recall": 0.0,
+    "syntax_preservation": 0.0,
+    "pass_at_1": false,
+    "compression_ratio": 8.0,
+    "tokens_kept": 2048
+  },
+  {
+    "method": "ScissorHands",
+    "seq_len": 16384,
+    "num_variables": 7,
+    "variables_preserved": 1,
+    "exact_recall": 1.0,
+    "syntax_preservation": 0.14285714285714285,
+    "pass_at_1": false,
+    "compression_ratio": 8.0,
+    "tokens_kept": 2048
+  }
+]

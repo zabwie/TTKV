@@ -21,7 +21,7 @@ wheels/
 *.egg
 
 # PyTorch
-# Not necessary, it's so small it only needs a popcorn *.pt
+*.pt
 *.pth
 *.ckpt
 

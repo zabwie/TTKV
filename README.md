@@ -1,20 +1,10 @@
-# TTKV - Three Tiered Key Value Cache Compression
+# TTKV - Tiered KV Cache Compression
 
 [![PyPI version](https://badge.fury.io/py/ttkv.svg)](https://badge.fury.io/py/ttkv)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**Three-tier progressive compression (full → 4:1 → 16:1) with structural survival floor.**
-
-TTKV is a PyTorch library that enables long-context inference on consumer GPUs by compressing the KV cache rather than evicting tokens. It solves the "slow-burn problem" where critical tokens mentioned early get evicted before the model attends to them.
-
-## Key Features
-
-- 🎯 **Three-Tier Compression**: Uncompressed (Tier 0) → 4:1 (Tier 1) → 16:1 (Tier 2)
-- 🛡️ **Structural Survival Floor**: Rare-but-critical tokens survive until attended
-- 🧠 **Attention-Guided Scoring**: Uses model's own attention patterns
-- ⚡ **Consumer GPU Ready**: Enables 16K context on RTX 3060 (12GB)
-- 🔌 **Transformers Compatible**: Works with HuggingFace models
+Three-tier progressive KV cache compression (1:1 - 4:1 - 16:1) with structural retention floor. Reduces KV cache memory by 86% at 8K context on consumer GPUs without evicting tokens.
 
 ## Installation
 
@@ -22,17 +12,12 @@ TTKV is a PyTorch library that enables long-context inference on consumer GPUs b
 pip install ttkv
 ```
 
-### Optional Dependencies
+Optional dependencies:
 
 ```bash
-# For 4-bit quantization support
-pip install ttkv[quantization]
-
-# For visualization
-pip install ttkv[viz]
-
-# Development dependencies
-pip install ttkv[dev]
+pip install ttkv[quantization]   # 4-bit quantization
+pip install ttkv[viz]            # visualization
+pip install ttkv[dev]            # development (pytest, mypy, black)
 ```
 
 ## Quick Start
@@ -41,141 +26,130 @@ pip install ttkv[dev]
 from ttkv import TieredKVCache, CacheConfig
 import torch
 
-# Configure the cache
 config = CacheConfig(
-    hidden_dim=768,
-    num_heads=12,
-    tier0_size=256,      # Recent tokens (uncompressed)
-    tier1_size=2048,     # Middle tier
-    tier1_compression=4,  # 4:1 compression
-    tier2_compression=16, # 16:1 compression
+    hidden_dim=896,
+    num_heads=2,
+    tier0_size=16,
+    tier1_size=512,
+    tier1_compression=4,
+    tier2_compression=16,
     tau_threshold=0.9
 )
 
-# Create cache
 cache = TieredKVCache(config)
-
-# Use with your model
-k = torch.randn(1, 12, 8192, 64)  # [batch, heads, seq, head_dim]
-v = torch.randn(1, 12, 8192, 64)
-retention = torch.rand(1, 8192)    # Salience scores
+k = torch.randn(1, 2, 8192, 64)
+v = torch.randn(1, 2, 8192, 64)
+retention = torch.rand(1, 8192)
 positions = torch.arange(8192).unsqueeze(0)
 
 cache.add(k, v, retention, positions)
-
-# Get compressed cache
 k_comp, v_comp, pos_comp = cache.get_compressed_cache()
 stats = cache.get_stats()
 print(f"Compression: {stats['compression_ratio']:.2f}x")
 ```
 
-## Performance
+## Key Features
 
-| Context | GPU | Baseline | TTKV | Compression |
-|---------|-----|----------|------|-------------|
-| 16K tokens | RTX 3060 (12GB) | OOM | ✅ Works | **7.36x** |
+- **Three-tier progressive compression**: Tokens degrade through tiers (full, 4:1, 16:1) rather than being evicted
+- **Retention floor**: Structurally critical tokens (codes, numbers, proper nouns) receive minimum priority, preventing destruction before the attention signal evaluates their importance
+- **Signal-to-noise optimization**: Aggressive compression improves retrieval by suppressing filler noise while the floor preserves critical signal
+- **Auto-configuration**: `auto_config()` determines optimal tier geometry from protected token positions
+- **Consumer GPU ready**: 7.4x compression at 8K tokens on RTX 3060 (12GB)
 
-Quality: <0.2% perplexity increase at 7.36x compression on GPT-2.
+## Verified Performance
 
-## Documentation
+All measurements on Qwen2.5-0.5B-Instruct (FP16, RTX 3060 12GB):
 
-- [Paper](paper/main.tex) - Full technical details
-- [API Reference](#api-reference) - Below
-- [Examples](tests/) - Test scripts and experiments
+| Context | Uncompressed KV | Compressed KV | Ratio | Memory Saved |
+|---------|----------------|---------------|-------|-------------|
+| 1,024 | 12.0 MB | 5.4 MB | 2.20x | 55% |
+| 2,048 | 24.0 MB | 8.5 MB | 2.83x | 65% |
+| 4,096 | 48.0 MB | 10.0 MB | 4.79x | 79% |
+| 8,192 | 96.0 MB | 13.0 MB | 7.39x | 86% |
+
+Slow-burn retrieval (needle at position 10, 3,600-token context, attention score < 0.005): TTKV achieves 9.0x compression with perfect recall, vs H2O's 7.1x best where it fails. See [paper](paper/main.tex) for full results.
 
 ## API Reference
 
-### Core Components
-
-#### `CacheConfig`
-Configuration for tiered KV cache.
+### Core
 
 ```python
-config = CacheConfig(
-    hidden_dim=768,
-    num_heads=12,
-    head_dim=64,
-    tier0_size=256,
-    tier1_size=2048,
-    tier1_compression=4,
-    tier2_compression=16,
-    tau_threshold=0.8
-)
+from ttkv import CacheConfig, TieredKVCache, SalienceScorer
 ```
 
-#### `TieredKVCache`
-Main cache implementation.
+`CacheConfig` configures tier geometry: `hidden_dim`, `num_heads`, `head_dim`, `tier0_size`, `tier1_size`, `tier1_compression`, `tier2_compression`, `tau_threshold`.
+
+`TieredKVCache` is the main compression cache. Methods: `add(k, v, retention, positions)`, `get_compressed_cache()`, `get_stats()`, `clear()`.
+
+### Auto-Configuration
 
 ```python
-cache = TieredKVCache(config)
-cache.add(k, v, retention, positions)
-k_comp, v_comp, pos_comp = cache.get_compressed_cache()
-stats = cache.get_stats()
+from ttkv import auto_config, build_retention_mask
+
+retention = build_retention_mask(n_tokens, needle_ranges=[(10, 28)], query_ranges=[(3590, 3600)])
+config = auto_config(n_tokens, retention > 0.9, target_signal_pct=3.5)
 ```
+
+`build_retention_mask` creates a retention tensor marking critical token ranges. `auto_config` determines optimal `tier0_size` and `tier1_size` to achieve the target signal percentage.
 
 ### Attention-Guided Components
 
-#### `AttentionGuidedScorer`
-Learns token importance from attention patterns.
-
 ```python
-from ttkv import AttentionGuidedScorer
-
-scorer = AttentionGuidedScorer(ema_decay=0.95, structural_floor=0.1)
-scorer.update_from_attention(attention_weights, query_position, token_id)
-salience = scorer.get_salience_scores(seq_len)
+from ttkv import AttentionGuidedScorer, AttentionGuidedWrapper, extract_attention_weights
 ```
 
-#### `AttentionGuidedWrapper`
-Full wrapper for models.
+`AttentionGuidedScorer` learns token importance from attention patterns (EMA-decayed). `AttentionGuidedWrapper` wraps HuggingFace models for attention-guided compression. `extract_attention_weights` extracts attention from model outputs.
+
+### Structural Priors
 
 ```python
-from ttkv import AttentionGuidedWrapper
-
-wrapper = AttentionGuidedWrapper(model, tokenizer, cache_config)
-result, stats = wrapper.generate_with_attention_guidance(input_ids)
+from ttkv import MockTypePriorClassifier, compute_type_prior_retention, create_mock_retention
 ```
+
+Regex-based token classification into named entities, numbers, function words, and content words. Used as a lightweight alternative to the learned salience scorer.
 
 ## Project Structure
 
 ```
-ttkv/
 ├── src/ttkv/
-│   ├── __init__.py          # Package exports
-│   ├── core.py              # TieredKVCache, CacheConfig
-│   ├── attention_scorer.py  # Attention-guided scoring
-│   └── type_prior.py        # Structural priors
+│   ├── __init__.py           # Package exports
+│   ├── core.py               # TieredKVCache, CacheConfig, SalienceScorer
+│   ├── attention_scorer.py   # AttentionGuidedScorer, AttentionGuidedWrapper
+│   ├── type_prior.py         # MockTypePriorClassifier, retention utilities
+│   ├── auto_config.py        # Auto-configuration of tier geometry
+│   └── train.py              # Salience scorer training pipeline
 ├── tests/
-│   ├── core/               # Core functionality tests
-│   └── experiments/        # Paper experiments
+│   ├── core/                 # Unit tests and baselines (H2O, ScissorHands)
+│   ├── experiments/          # Paper experiments and ablation study
+│   └── real_experiments/     # Real model benchmarks (Qwen2.5-0.5B)
 ├── paper/
-│   └── main.tex            # LaTeX source
-└── README.md               # This file
+│   └── main.tex              # Paper source
+├── models/                   # Trained scorer checkpoints
+├── results/                  # Benchmark outputs (JSON)
+├── reproduce.sh              # One-command reproducibility
+└── pyproject.toml            # Project configuration
 ```
+
+## Reproducibility
+
+```bash
+pip install -e ".[dev]"
+bash reproduce.sh
+```
+
+Requires: Python 3.9+, PyTorch 2.0+, RTX 3060 (12GB) or equivalent.
 
 ## Citation
 
-If you use TTKV in your research:
-
 ```bibtex
 @software{ttkv2026,
-  title={TTKV: Salience-Aware Tiered KV Cache Compression},
-  author={Pérez Muñiz, Zabdiel},
+  title={TTKV: Tiered KV Cache Compression with Retention Floor},
+  author={Perez Muniz, Zabdiel},
   year={2026},
-  url={https://github.com/zabwie/ttkv}
+  url={https://github.com/zabwie/TTKV}
 }
 ```
 
 ## License
 
-MIT License - see [LICENSE](LICENSE) file.
-
-## Acknowledgments
-
-- [HuggingFace Transformers](https://github.com/huggingface/transformers)
-- [PyTorch](https://pytorch.org/)
-
-## Contact
-
-- GitHub Issues: [github.com/zabwie/ttkv/issues](https://github.com/zabwie/ttkv/issues)
-- Email: zabdielperez00@gmail.com
+MIT - see [LICENSE](LICENSE).

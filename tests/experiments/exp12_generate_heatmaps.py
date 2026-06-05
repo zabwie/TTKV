@@ -4,9 +4,6 @@ Experiment #12: Generate Attention Heatmaps
 Creates heatmap figures for Appendix A showing slow-burn attention patterns.
 """
 
-import sys
-sys.path.insert(0, '../src')
-
 import torch
 import numpy as np
 import json

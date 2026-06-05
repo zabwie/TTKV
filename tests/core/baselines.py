@@ -1,8 +1,5 @@
 """Baseline KV Cache eviction methods for comparison."""
 
-import sys
-sys.path.insert(0, '../src')
-
 import torch
 import torch.nn.functional as F
 from typing import Optional, Tuple, List, Dict

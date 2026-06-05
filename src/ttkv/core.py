@@ -45,17 +45,16 @@ class SalienceScorer(nn.Module):
     
     def forward(self, hidden_states: torch.Tensor) -> torch.Tensor:
         return self.net(hidden_states).squeeze(-1)
-
-
-class RetentionScheduler(nn.Module):
-    def __init__(self):
-        super().__init__()
-        self.alpha = nn.Parameter(torch.tensor(0.5))
     
-    def forward(self, salience_scores: torch.Tensor, type_priors: torch.Tensor) -> torch.Tensor:
-        alpha = torch.sigmoid(self.alpha)
-        salience_norm = torch.sigmoid(salience_scores)
-        return alpha * salience_norm + (1 - alpha) * type_priors
+    def save_pretrained(self, path: str) -> None:
+        torch.save(self.state_dict(), path)
+    
+    @classmethod
+    def load_pretrained(cls, path: str, hidden_dim: int = 768, salience_hidden: int = 256) -> 'SalienceScorer':
+        instance = cls(hidden_dim=hidden_dim, salience_hidden=salience_hidden)
+        instance.load_state_dict(torch.load(path, weights_only=True))
+        instance.eval()
+        return instance
 
 
 class TieredKVCache:
@@ -79,7 +78,7 @@ class TieredKVCache:
     
     def _extract_and_stack(self, tensor_list: List[torch.Tensor]) -> torch.Tensor:
         if not tensor_list:
-            return None
+            return torch.empty(0)
         
         # Handle different dimensionalities
         if tensor_list[0].dim() == 1:
@@ -104,7 +103,10 @@ class TieredKVCache:
                 padded.append(t)
             return torch.stack(padded, dim=0) if padded else None
         else:
-            return None
+            raise ValueError(
+                f"Unsupported tensor dimensionality: {tensor_list[0].dim()}. "
+                f"Expected 1D (position tensors) or 3D (KV tensors)."
+            )
     
     def get_compressed_cache(self) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
         if not self.k_cache:
@@ -212,7 +214,14 @@ class TieredKVCache:
                 pos_tiers.append(pos_comp)
         
         if k_tiers:
-            return torch.cat(k_tiers, dim=2), torch.cat(v_tiers, dim=2), torch.cat(pos_tiers, dim=1)
+            k_cat = torch.cat(k_tiers, dim=2)
+            v_cat = torch.cat(v_tiers, dim=2)
+            pos_cat = torch.cat(pos_tiers, dim=1)
+            sort_idx = torch.argsort(pos_cat, dim=1)
+            k_sorted = torch.gather(k_cat, 2, sort_idx.unsqueeze(1).unsqueeze(-1).expand(-1, num_heads, -1, head_dim))
+            v_sorted = torch.gather(v_cat, 2, sort_idx.unsqueeze(1).unsqueeze(-1).expand(-1, num_heads, -1, head_dim))
+            pos_sorted = torch.gather(pos_cat, 1, sort_idx)
+            return k_sorted, v_sorted, pos_sorted
         else:
             return (torch.empty(batch_size, num_heads, 0, head_dim, device=device),
                     torch.empty(batch_size, num_heads, 0, head_dim, device=device),
@@ -260,7 +269,10 @@ class TieredKVCache:
             return {'total_tokens': 0, 'compressed_tokens': 0, 'compression_ratio': 1.0}
         
         k_comp, _, _ = self.get_compressed_cache()
-        compressed_len = k_comp.size(2) if k_comp is not None else 0
+        if k_comp is None:
+            return {'total_tokens': self.total_tokens, 'compressed_tokens': 0, 'compression_ratio': float(self.total_tokens)}
+        
+        compressed_len = k_comp.size(2)
         
         return {
             'total_tokens': self.total_tokens,

@@ -6,9 +6,6 @@ at fixed budgets, not at matched quality. This script sweeps baseline budgets to
 their quality-matched compression ratios.
 """
 
-import sys
-sys.path.insert(0, '../src')
-
 import torch
 import torch.nn.functional as F
 import numpy as np
