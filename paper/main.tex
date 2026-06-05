@@ -280,14 +280,15 @@ Progressive degradation beats destruction. Don't evict tokens until they're prov
 
 \section*{Reproducibility}
 
-All experiments are reproducible on a single RTX 3060 (12GB). Run:
+All experiments are reproducible on a single RTX 3060 (12GB) from a cloned repository:
 
 \begin{verbatim}
+git clone https://github.com/zabwie/TTKV && cd TTKV
 pip install -e ".[dev]"
-cd tests/real_experiments && python3 bench_perplexity.py
+bash reproduce.sh
 \end{verbatim}
 
-Results are saved to \texttt{results/real\_compression\_qwen.json}. The auto-configuration API is available via \texttt{from ttkv import auto\_config, build\_retention\_mask}.
+Results are saved to \texttt{results/real\_compression\_qwen.json}. For use as a library, install from PyPI: \texttt{pip install ttkv}.
 
 \begin{thebibliography}{10}
 
